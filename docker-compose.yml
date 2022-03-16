@@ -1,16 +1,34 @@
 version: "3.7"
 
 services:
+  coupon:
+    image: greenpeace_mercadopago_coupon:dev
+    container_name: greenpeace_mercadopago_coupon
+    build:
+      context: ./src/coupon
+      dockerfile: Dockerfile
+      target: base
+    volumes:
+      - ./src/coupon/src:/home/app/coupon/src
+      - /home/app/coupon/node_modules/
+    expose:
+      - '3000'
+    ports:
+      - '3000:3000'
+    environment:
+      - PORT=3000
+    command: npm run client:start:development
+    stdin_open: true
   api:
     image: greenpeace_greenlab_api:dev
     container_name: greenpeace_greenlab_api
     build:
-      context: ./repos/api
+      context: ./src/api
       dockerfile: Dockerfile
       target: base
     volumes:
-      - ./repos/api/src:/home/app/api/src
-      - ./repos/api/nodemon.json:/home/app/api/nodemon.json
+      - ./src/api/src:/home/app/api/src
+      - ./src/api/nodemon.json:/home/app/api/nodemon.json
     expose:
       - '5053'
     ports:
@@ -18,13 +36,13 @@ services:
     environment:
       - PORT=5053
     command: npm run start:dev
-    depends_on:
-      - mongo
-  mongo:
-    container_name: greenpeace_greenlab_mongo
-    image: mongo:4
-    restart: always
-    volumes:
-      - ./shared_volume/db/:/data/db/
-    ports:
-      - "27016:27017"
+    # depends_on:
+    #   - mongo
+  # mongo:
+  #   container_name: greenpeace_greenlab_mongo
+  #   image: mongo:4
+  #   restart: always
+  #   volumes:
+  #     - ./shared_volume/db/:/data/db/
+  #   ports:
+  #     - "27016:27017"
