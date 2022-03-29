@@ -12,11 +12,11 @@ services:
       - ./src/coupon/src:/home/app/coupon/src
       - /home/app/coupon/node_modules/
     expose:
-      - '3000'
+      - '3001'
     ports:
-      - '3000:3000'
+      - '3001:3001'
     environment:
-      - PORT=3000
+      - PORT=3001
     command: npm run client:start:development
     stdin_open: true
   api:
@@ -30,11 +30,11 @@ services:
       - ./src/api/src:/home/app/api/src
       - ./src/api/nodemon.json:/home/app/api/nodemon.json
     expose:
-      - '5053'
+      - '5001'
     ports:
-      - '5053:5053'
+      - '5001:5001'
     environment:
-      - PORT=5053
+      - PORT=5001
     command: npm run start:dev
     # depends_on:
     #   - mongo

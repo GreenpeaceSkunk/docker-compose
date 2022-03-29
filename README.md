@@ -24,4 +24,5 @@ git rm -f src/api
 # Remove used container
 ```bash
 docker rm $(docker ps -a -f name=greenpeace_mercadopago_coupon -q)
+\ docker rm $(docker ps -a -f name=greenpeace_greenlab_api -q)
 ```
