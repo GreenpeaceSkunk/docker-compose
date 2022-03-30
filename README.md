@@ -23,6 +23,10 @@ git rm -f src/api
 
 # Remove used container
 ```bash
-docker rm $(docker ps -a -f name=greenpeace_mercadopago_coupon -q)
-\ docker rm $(docker ps -a -f name=greenpeace_greenlab_api -q)
+docker stop greenpeace_greenlab_api stop greenpeace_mercadopago_coupon
+&& docker rm $(docker ps -a -f name=greenpeace_mercadopago_coupon -q) $(docker ps -a -f name=greenpeace_greenlab_api -q)
+```
+
+```
+$ docker exec -it greenpeace_mercadopago_coupon bash -c "mv package.json package.min.json && mv package.full.json package.json && cat package.json && npm install && npm run types"
 ```
