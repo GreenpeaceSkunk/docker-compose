@@ -30,3 +30,9 @@ docker stop greenpeace_greenlab_api stop greenpeace_mercadopago_coupon
 ```
 $ docker exec -it greenpeace_mercadopago_coupon bash -c "mv package.json package.min.json && mv package.full.json package.json && cat package.json && npm install && npm run types"
 ```
+
+## Nginx
+```
+$ nano /etc/nginx/sites-available/default 
+$ service nginx restart
+```
