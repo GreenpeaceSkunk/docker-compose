@@ -2,3 +2,4 @@
 node_modules/
 shared_volume/
 src/**/*
+*.log
