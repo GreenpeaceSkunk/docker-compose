@@ -3,7 +3,7 @@ version: "3.8"
 services:
   coupon:
     image: greenlab_coupon:prod
-    container_name: greenlab_coupon_prod
+    container_name: greenlab_coupon
     build:
       context: ./src/coupon
       dockerfile: Dockerfile.prod
