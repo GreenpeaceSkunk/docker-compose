@@ -64,7 +64,7 @@ remove-images:
 
 .PHONY: deploy
 deploy:
-	make down && make remove-all && build-prod
+	make down && make remove-images && build-prod
 
 .PHONY: deploy-silent
 deploy-silent:
