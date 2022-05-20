@@ -58,14 +58,18 @@ repos:
 update-repos:
 	# @git pull && cd ./repos/api && git pull
 
-.PHONY: remove-all
-remove-all:
+.PHONY: remove-images
+remove-images:
 	docker rmi $(docker images -f "dangling=true" -q) && docker rmi --force $(docker inspect --format="{{.Id}}" greenlab_coupon:prod) $(docker inspect --format="{{.Id}}" greenlab_api:prod)
 
 .PHONY: deploy
-deploy-silent:
+deploy:
 	make down && make remove-all && build-prod
 
 .PHONY: deploy-silent
 deploy-silent:
 	make down && make remove-all && build-prod-silent
+
+.PHONY: update
+update:
+	git pull && git submodule update
