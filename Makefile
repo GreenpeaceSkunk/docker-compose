@@ -60,7 +60,7 @@ update-repos:
 
 .PHONY: remove-images
 remove-images:
-	docker rmi $(docker images -f "dangling=true" -q) && docker rmi --force $(docker inspect --format="{{.Id}}" greenlab_coupon) $(docker inspect --format="{{.Id}}" greenlab_api)
+	docker rmi $(docker images -f "dangling=true" -q) && docker rmi --force $(docker inspect --format="{{.Id}}" greenlab_coupon:prod) $(docker inspect --format="{{.Id}}" greenlab_api:prod)
 
 .PHONY: deploy
 deploy:
