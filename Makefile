@@ -46,6 +46,14 @@ build-prod:
 build-prod-silent:
 	docker-compose -f docker-compose.prod.yml up -d --build --remove-orphans
 
+.PHONY: build-test
+build-test:
+	docker-compose -f docker-compose.test.yml up --build --remove-orphans
+
+.PHONY: build-test-silent
+build-test-silent:
+	docker-compose -f docker-compose.test.yml up -d --build --remove-orphans
+
 .PHONY: down
 down:
 	docker-compose -f docker-compose.dev.yml -f docker-compose.test.yml -f docker-compose.prod.yml down
