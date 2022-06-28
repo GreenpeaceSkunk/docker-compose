@@ -15,22 +15,23 @@ fi
 echo "Checking $DOCKER_API status: ($(docker ps -q -f name=$DOCKER_API))"
 if [ ! "$(docker ps -q -f name=$DOCKER_API)" ]; then
  is_running=false
- echo "$(date): $DOCKER_API is down" >> $LOGS
+ echo "$(date): Service $DOCKER_API is down" >> $LOGS
 else
-  echo "$(date): $DOCKER_API is up" >> $LOGS
+  echo "$(date): Service $DOCKER_API is up" >> $LOGS
 fi
 
 echo "Checking $DOCKER_COUPON status: ($(docker ps -q -f name=$DOCKER_COUPON))"
 if [ ! "$(docker ps -q -f name=$DOCKER_COUPON)" ]; then
   is_running=false
-  echo "$(date): $DOCKER_COUPON is down" >> $LOGS
+  echo "$(date): Service $DOCKER_COUPON is down" >> $LOGS
 else
-  echo "$(date): $DOCKER_COUPON is up" >> $LOGS
+  echo "$(date): Service $DOCKER_COUPON is up" >> $LOGS
 fi
 
 if [ "$is_running" = false ]; then
+  echo "$(date): Reloading .." >> $LOGS
   make build-prod-silent
-  echo "$(date): Reloading" >> $LOGS
+  echo "$(date): Reloaded" >> $LOGS
 else
   echo "$(date): All good" >> $LOGS
 fi
