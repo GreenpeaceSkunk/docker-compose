@@ -1,17 +1,36 @@
 #!/usr/bin/env bash
 
 LOGS=/var/log/greenlab.log
-# LOGS=./greenlab.log
+DOCKER_API="greenlab_api"
+DOCKER_COUPON="greenlab_coupon"
+
+is_running=true
+
 if test -f "$LOGS_FILE"; then
     echo "$LOGS_FILE exists."
 else
   touch $LOGS_FILE
 fi
 
-if [ ! "$(docker ps -q -f name=greenlab_api)" ] | [ ! "$(docker ps -q -f name=greenlab_coupon)" ]; then
-  echo "$(date): Service is down" >> $LOGS
-  echo "$(date): $(docker ps -a)" >> $LOGS
-  make build-prod-silent
+echo "Checking $DOCKER_API status: ($(docker ps -q -f name=$DOCKER_API))"
+if [ ! "$(docker ps -q -f name=$DOCKER_API)" ]; then
+ is_running=false
+ echo "$(date): $DOCKER_API is down" >> $LOGS
 else
- echo  "$(date): Service is up" >> $LOGS
+  echo "$(date): $DOCKER_API is up" >> $LOGS
+fi
+
+echo "Checking $DOCKER_COUPON status: ($(docker ps -q -f name=$DOCKER_COUPON))"
+if [ ! "$(docker ps -q -f name=$DOCKER_COUPON)" ]; then
+  is_running=false
+  echo "$(date): $DOCKER_COUPON is down" >> $LOGS
+else
+  echo "$(date): $DOCKER_COUPON is up" >> $LOGS
+fi
+
+if [ "$is_running" = false ]; then
+  make build-prod-silent
+  echo "$(date): Reloading" >> $LOGS
+else
+  echo "$(date): All good" >> $LOGS
 fi
