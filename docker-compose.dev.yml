@@ -6,7 +6,7 @@ services:
     container_name: greenlab_coupon
     build:
       context: ./src/coupon
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
       target: base
     volumes:
       - ./src/coupon/src:/home/app/coupon/src
@@ -36,13 +36,3 @@ services:
     environment:
       - PORT=5003
     command: npm run server:start:development
-    # depends_on:
-    #   - mongo
-  # mongo:
-  #   container_name: greenpeace_greenlab_mongo
-  #   image: mongo:4
-  #   restart: always
-  #   volumes:
-  #     - ./shared_volume/db/:/data/db/
-  #   ports:
-  #     - "27016:27017"

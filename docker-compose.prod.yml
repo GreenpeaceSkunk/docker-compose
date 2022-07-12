@@ -7,7 +7,6 @@ services:
     build:
       context: ./src/coupon
       dockerfile: Dockerfile.prod
-      # target: builder
     ports:
       - '3001:80'
     environment:
