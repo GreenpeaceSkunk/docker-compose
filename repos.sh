@@ -15,3 +15,10 @@ if [ -z "$coupon" ]
 then
   git submodule add -f --name coupon https://github.com/GreenpeaceSkunk/cupon-mercadopago.git src/coupon
 fi
+
+# Clone or Update Landing Downgrade
+landing-downgrade="$(git config --file .gitmodules --get-regexp path | awk '{ print $2 }' | grep src/landing-downgrade)"
+if [ -z "$landing-downgrade" ]
+then
+  git submodule add -f --name landing-downgrade https://github.com/GreenpeaceSkunk/landing-downgrade src/landing-downgrade
+fi
