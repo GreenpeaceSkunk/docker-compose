@@ -4,3 +4,4 @@
 [submodule "coupon"]
 	path = src/coupon
 	url = https://github.com/GreenpeaceSkunk/cupon-mercadopago.git
+
