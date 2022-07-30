@@ -5,6 +5,3 @@
 	path = src/coupon
 	url = https://github.com/GreenpeaceSkunk/cupon-mercadopago.git
 
-[submodule "landing-downgrade"]
-	path = src/landing-downgrade
-	url = https://github.com/GreenpeaceSkunk/landing-downgrade
