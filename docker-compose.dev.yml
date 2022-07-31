@@ -2,8 +2,8 @@ version: "3.8"
 
 services:
   coupon:
-    image: greenlab_coupon:dev
-    container_name: greenlab_coupon
+    image: greenlab/coupon:dev
+    container_name: greenlab-coupon
     build:
       context: ./src/coupon
       dockerfile: Dockerfile.dev
@@ -12,15 +12,15 @@ services:
       - ./src/coupon/src:/home/app/coupon/src
       - /home/app/coupon/node_modules/
     expose:
-      - '3003'
+      - '3001'
     ports:
-      - '3003:3003'
+      - '3001:3001'
     environment:
-      - PORT=3003
+      - PORT=3001
     command: npm run client:start:development
     stdin_open: true
   landing-downgrade:
-    image: greenlab-landing-downgrade:dev
+    image: greenlab/landing-downgrade:dev
     container_name: greenlab-landing-downgrade
     build:
       context: ./src/landing-downgrade
@@ -30,16 +30,16 @@ services:
       - ./src/landing-downgrade/src:/home/app/landing-downgrade/src
       - /home/app/landing-downgrade/node_modules/
     expose:
-      - '3004'
+      - '3002'
     ports:
-      - '3004:3004'
+      - '3002:3002'
     environment:
-      - PORT=3004
+      - PORT=3002
     command: npm run client:start:development
     stdin_open: true
   api:
-    image: greenlab_api:dev
-    container_name: greenlab_api
+    image: greenlab/api:dev
+    container_name: greenlab-api
     build:
       context: ./src/api
       dockerfile: Dockerfile
