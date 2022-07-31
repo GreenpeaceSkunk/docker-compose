@@ -12,9 +12,11 @@ Where `gpwebadmin` is the username and `13.84.42.191` is the server's IP. Is man
 
 # Create or remove a submodule
 
-`git submodule add --force --name api https://github.com/GreenpeaceSkunk/greenlab-api src/api`
+`git submodule add --force --name landing-downgrade https://github.com/GreenpeaceSkunk/landing-downgrade src/landing-downgrade`
 
 <!-- git clone --recurse-submodules --shallow-submodules https://github.com/GreenpeaceSkunk/greenlab-api.git src/api -->
+
+git clone --recurse-submodules --shallow-submodules https://github.com/GreenpeaceSkunk/landing-downgrade.git src/landing-downgrade
 
 or 
 `git submodule add --force https://github.com/GreenpeaceSkunk/greenlab-api src/api`
