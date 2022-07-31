@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 LOGS=/var/log/greenlab.log
-DOCKER_API="greenlab_api"
-DOCKER_COUPON="greenlab_coupon"
+DOCKER_API="greenlab-api"
+DOCKER_COUPON="greenlab-coupon"
 DOCKER_LANDING_DOWNGRADE="greenlab-landing-downgrade"
 
 service_running=true
