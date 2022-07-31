@@ -2,8 +2,8 @@ version: "3.8"
 
 services:
   coupon:
-    image: greenlab_coupon:prod
-    container_name: greenlab_coupon
+    image: greenlab/coupon:prod
+    container_name: greenlab-coupon
     build:
       context: ./src/coupon
       dockerfile: Dockerfile.prod
@@ -12,7 +12,7 @@ services:
     environment:
       - PORT=3001
   landing-downgrade:
-    image: greenlab-landing-downgrade:prod
+    image: greenlab/landing-downgrade:prod
     container_name: greenlab-landing-downgrade
     build:
       context: ./src/landing-downgrade
@@ -22,8 +22,8 @@ services:
     environment:
       - PORT=3002
   api:
-    image: greenlab_api:prod
-    container_name: greenlab_api
+    image: greenlab/api:prod
+    container_name: greenlab-api
     build:
       context: ./src/api
       dockerfile: Dockerfile
