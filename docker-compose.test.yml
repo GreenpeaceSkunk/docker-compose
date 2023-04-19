@@ -11,16 +11,16 @@ services:
       - '3002:80'
     environment:
       - PORT=3002
-  landing-downgrade:
-    image: greenlab/landing-downgrade:test
-    container_name: greenlab-landing-downgrade
-    build:
-      context: ./src/landing-downgrade
-      dockerfile: Dockerfile.test
-    ports:
-      - '3003:80'
-    environment:
-      - PORT=3003
+  # landing-downgrade:
+  #   image: greenlab/landing-downgrade:test
+  #   container_name: greenlab-landing-downgrade
+  #   build:
+  #     context: ./src/landing-downgrade
+  #     dockerfile: Dockerfile.test
+  #   ports:
+  #     - '3003:80'
+  #   environment:
+  #     - PORT=3003
   api:
     image: greenlab/api:test
     container_name: greenlab-api

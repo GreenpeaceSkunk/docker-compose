@@ -19,24 +19,24 @@ services:
       - PORT=3001
     command: npm run client:start:development
     stdin_open: true
-  landing-downgrade:
-    image: greenlab/landing-downgrade:dev
-    container_name: greenlab-landing-downgrade
-    build:
-      context: ./src/landing-downgrade
-      dockerfile: Dockerfile.dev
-      target: base
-    volumes:
-      - ./src/landing-downgrade/src:/home/app/landing-downgrade/src
-      - /home/app/landing-downgrade/node_modules/
-    expose:
-      - '3002'
-    ports:
-      - '3002:3002'
-    environment:
-      - PORT=3002
-    command: npm run client:start:development
-    stdin_open: true
+  # landing-downgrade:
+  #   image: greenlab/landing-downgrade:dev
+  #   container_name: greenlab-landing-downgrade
+  #   build:
+  #     context: ./src/landing-downgrade
+  #     dockerfile: Dockerfile.dev
+  #     target: base
+  #   volumes:
+  #     - ./src/landing-downgrade/src:/home/app/landing-downgrade/src
+  #     - /home/app/landing-downgrade/node_modules/
+  #   expose:
+  #     - '3002'
+  #   ports:
+  #     - '3002:3002'
+  #   environment:
+  #     - PORT=3002
+  #   command: npm run client:start:development
+  #   stdin_open: true
   api:
     image: greenlab/api:dev
     container_name: greenlab-api
