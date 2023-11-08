@@ -3,7 +3,7 @@
 LOGS=/var/log/greenlab.log
 DOCKER_API="greenlab-api"
 DOCKER_COUPON="greenlab-coupon"
-DOCKER_LANDING_DOWNGRADE="greenlab-landing-downgrade"
+# DOCKER_LANDING_DOWNGRADE="greenlab-landing-downgrade"
 
 service_running=true
 
