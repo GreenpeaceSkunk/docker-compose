@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   coupon:
-    image: greenlab/coupon:dev
+    image: greenpeace/coupon:dev
     container_name: greenlab-coupon
     build:
       context: ./src/coupon
@@ -38,8 +38,8 @@ services:
   #   command: npm run client:start:development
   #   stdin_open: true
   api:
-    image: greenlab/api:dev
-    container_name: greenlab-api
+    image: greenpeace/api:dev
+    container_name: greenpeace-api
     build:
       context: ./src/api
       dockerfile: Dockerfile

@@ -24,7 +24,7 @@ up-prod-silent:
 
 .PHONY: build-dev
 build-dev:
-	docker-compose -f docker-compose.dev.yml up --build --remove-orphans
+	docker-compose -f docker-compose.dev.yml up --build --remove-orphans --force-recreate --renew-anon-volumes
 
 .PHONY: build-dev-silent
 build-dev-silent:

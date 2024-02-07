@@ -2,8 +2,8 @@ version: "3.8"
 
 services:
   coupon:
-    image: greenlab/coupon:test
-    container_name: greenlab-coupon
+    image: greenpeace/coupon:test
+    container_name: greenpeace-coupon
     build:
       context: ./src/coupon
       dockerfile: Dockerfile.test
@@ -22,8 +22,8 @@ services:
   #   environment:
   #     - PORT=3003
   api:
-    image: greenlab/api:test
-    container_name: greenlab-api
+    image: greenpeace/api:test
+    container_name: greenpeace-api
     build:
       context: ./src/api
       dockerfile: Dockerfile
