@@ -1,5 +1,8 @@
 version: "3.8"
 
+networks:
+  greenpeace:
+
 services:
   coupon:
     image: greenpeace/coupon:dev
@@ -19,6 +22,8 @@ services:
       - PORT=3001
     command: npm run client:start:development
     stdin_open: true
+    networks:
+      - greenpeace
   # landing-downgrade:
   #   image: greenlab/landing-downgrade:dev
   #   container_name: greenlab-landing-downgrade
