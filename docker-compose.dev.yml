@@ -1,4 +1,4 @@
-version: "3.8"
+version: "3.9"
 
 networks:
   greenpeace:
@@ -24,6 +24,7 @@ services:
     stdin_open: true
     networks:
       - greenpeace
+
   # landing-downgrade:
   #   image: greenlab/landing-downgrade:dev
   #   container_name: greenlab-landing-downgrade
@@ -42,6 +43,7 @@ services:
   #     - PORT=3002
   #   command: npm run client:start:development
   #   stdin_open: true
+
   api:
     image: greenpeace/api:dev
     container_name: greenpeace-api
@@ -53,9 +55,44 @@ services:
       - ./src/api/src:/home/app/api/src
       - ./src/api/nodemon.json:/home/app/api/nodemon.json
     expose:
-      - '5003'
+      - $SERVER_DOCKER_PORT
     ports:
-      - '5003:5003'
+      - $SERVER_LOCAL_PORT:$SERVER_DOCKER_PORT
     environment:
-      - PORT=5003
+      - SERVER_PORT=$SERVER_LOCAL_PORT
+      - DB_HOST=$MONGO_HOST
+      - DB_USERNAME=$MONGO_INITDB_ROOT_USERNAME
+      - DB_PASSWORD=$MONGO_INITDB_ROOT_PASSWORD
+      - DB_NAME=$MONGO_DATABASE
+      - DB_PORT=$MONGO_DOCKER_PORT
     command: npm run server:start:development
+    depends_on:
+      - mongodb
+    links:
+      - mongodb
+    networks:
+      - greenpeace
+
+  mongodb:
+    image: greenpeace/mongodb:dev
+    container_name: $MONGO_HOST
+    build:
+      context: ./database
+      dockerfile: Dockerfile
+    restart: always
+    env_file: ./.env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=$MONGO_INITDB_ROOT_USERNAME
+      - MONGO_INITDB_ROOT_PASSWORD=$MONGO_INITDB_ROOT_PASSWORD
+    volumes:
+      - mongodb-data:/data/db/
+      - ./database/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
+    ports:
+      - ${MONGO_LOCAL_PORT}:${MONGO_DOCKER_PORT}
+    command: [--auth]
+    networks:
+      - greenpeace
+
+volumes:
+    mongodb-data:
+      name: "greenpeace-mongodb-data-dev"
