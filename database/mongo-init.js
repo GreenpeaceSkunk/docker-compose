@@ -12,8 +12,8 @@ db.createUser(
 );
 
 // Create default collections
-db.createCollection('auth');
-db.createCollection('applications');
-db.createCollection('contacts');
-db.createCollection('transactions');
-db.createCollection('logs');
+// db.createCollection('salesforce_sessions');
+// db.createCollection('applications');
+// db.createCollection('contacts');
+// db.createCollection('transactions');
+// db.createCollection('logs');

@@ -1,5 +1,8 @@
 *.pem
-node_modules/
-shared_volume/
 src/**/*
 *.log
+database/data/db
+.env
+.code-workspace
+.DS_Store
+*/**/.DS_Store
