@@ -1,3 +1,11 @@
+.PHONY: build-dev
+build-dev:
+	docker-compose -f docker-compose.dev.yml up --build --remove-orphans --force-recreate --renew-anon-volumes
+
+.PHONY: build-dev-silent
+build-dev-silent:
+	docker-compose -f docker-compose.dev.yml up -d --build --remove-orphans
+
 .PHONY: up-dev
 up-dev:
 	docker-compose -f docker-compose.dev.yml up
@@ -21,14 +29,6 @@ up-prod:
 .PHONY: up-prod-silent
 up-prod-silent:
 	docker-compose -f docker-compose.prod.yml up -d
-
-.PHONY: build-dev
-build-dev:
-	docker-compose -f docker-compose.dev.yml up --build --remove-orphans --force-recreate --renew-anon-volumes
-
-.PHONY: build-dev-silent
-build-dev-silent:
-	docker-compose -f docker-compose.dev.yml up -d --build --remove-orphans
 
 .PHONY: build-test
 build-test:
