@@ -1,0 +1,80 @@
+version: "3.9"
+
+networks:
+  greenpeace:
+
+services:
+  coupon:
+    image: greenpeace/coupon:staging
+    container_name: greenpeace-coupon
+    build:
+      context: ./src/coupon
+      dockerfile: Dockerfile.test
+    ports:
+      - '3002:80'
+    environment:
+      - PORT=3002
+    networks:
+      - greenpeace
+  # landing-downgrade:
+  #   image: greenlab/landing-downgrade:staging
+  #   container_name: greenlab-landing-downgrade
+  #   build:
+  #     context: ./src/landing-downgrade
+  #     dockerfile: Dockerfile.staging
+  #   ports:
+  #     - '3003:80'
+  #   environment:
+  #     - PORT=3003
+  api:
+    image: greenpeace/api:staging
+    container_name: greenpeace-api
+    build:
+      context: ./src/api
+      dockerfile: Dockerfile
+      target: staging
+    volumes:
+      - ./src/api/src:/home/app/api/src
+      - ./src/api/nodemon.json:/home/app/api/nodemon.json
+    expose:
+      - $SERVER_DOCKER_PORT
+    ports:
+      - $SERVER_LOCAL_PORT:$SERVER_DOCKER_PORT
+    environment:
+      - SERVER_PORT=$SERVER_DOCKER_PORT
+      - DB_HOST=$MONGO_HOST
+      - DB_USERNAME=$MONGO_INITDB_ROOT_USERNAME
+      - DB_PASSWORD=$MONGO_INITDB_ROOT_PASSWORD
+      - DB_NAME=$MONGO_DATABASE
+      - DB_PORT=$MONGO_DOCKER_PORT
+    command: npm run server:start:staging
+    depends_on:
+      - mongodb
+    links:
+      - mongodb
+    networks:
+      - greenpeace
+
+  mongodb:
+    image: greenpeace/mongodb:staging
+    container_name: $MONGO_HOST
+    build:
+      context: ./database
+      dockerfile: Dockerfile
+    restart: always
+    env_file: ./.env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=$MONGO_INITDB_ROOT_USERNAME
+      - MONGO_INITDB_ROOT_PASSWORD=$MONGO_INITDB_ROOT_PASSWORD
+    volumes:
+      - mongodb-data:/data/db/
+      - ./database/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
+    ports:
+      - ${MONGO_LOCAL_PORT}:${MONGO_DOCKER_PORT}
+    command: [--auth]
+    networks:
+      - greenpeace
+
+volumes:
+    mongodb-data:
+      name: "greenpeace-mongodb-data-staging"
